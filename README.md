@@ -9,7 +9,7 @@ Features
 
 Install
 -------
-Starting with LiveSplit 1.4, you can download and install LiveSplit.Kotor automatically from within the Splits Editor with just one click. Just type in "kotor 2", "kotor ii", "knights of the old republic ii", or "knights of the old republic 2" with any capitalization. Start the game and click Activate. This downloads LiveSplit.Kotor to the Components folder.
+Starting with LiveSplit 1.4, you can download and install LiveSplit.Kotor automatically from within the Splits Editor with just one click. Just type in "KotOR 2", "KotOR II", "Knights of the Old Republic 2", or "Knights of the Old Republic II". Start the game and click Activate. This downloads LiveSplit.Kotor to the Components folder.
 
 Change Log
 ----------
