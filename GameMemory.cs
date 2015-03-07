@@ -18,9 +18,9 @@ namespace LiveSplit.Kotor2
         private SynchronizationContext _uiThread;
         private List<int> _ignorePIDs;
 
-        private DeepPointer _isNotLoadSavePtr;
-        private DeepPointer _isActiveWindowPtr;
-        private DeepPointer _isMoviePlayingPtr;
+        private DeepPointer _isNotLoadSavePtr; // == 1 if (not saving or loading) && swkotor2 is the active window
+        private DeepPointer _isActiveWindowPtr; // == 1 if swkotor2 is the active window
+        private DeepPointer _isMoviePlayingPtr; // == 1 if a movie is playing
 
         // private enum ExpectedDllSizes
         // {
@@ -29,9 +29,32 @@ namespace LiveSplit.Kotor2
 
         public GameMemory()
         {
-            _isNotLoadSavePtr = new DeepPointer("dinput8.dll", 0x2C1D4); // == 1 if (not saving or loading) && swkotor2 is the active window
-            _isActiveWindowPtr = new DeepPointer(0x428518); // == 1 if swkotor2 is the active window
-            _isMoviePlayingPtr = new DeepPointer(0x428798); // == 1 if a movie is playing
+            switch (Environment.OSVersion.Version.Minor)
+            {
+                case 0: // "Vista/Win2008Server"
+                case 1: // "Win7/Win2008Server R2"
+                    _isNotLoadSavePtr = new DeepPointer("dinput8.dll", 0x2C1D4);
+                    _isActiveWindowPtr = new DeepPointer(0x428518);
+                    _isMoviePlayingPtr = new DeepPointer(0x428798);
+                    break;
+
+                case 2: // "Win8/Win2012Server"
+                case 3: // "Win8.1/Win2012Server R2"
+                    _isNotLoadSavePtr = new DeepPointer("dinput8.dll", 0x2C1D4);
+                    _isActiveWindowPtr = new DeepPointer(0x428518);
+                    _isMoviePlayingPtr = new DeepPointer(0x428798);
+                    break;
+
+                default: // assume the same as "Vista/Win2008Server" and "Win7/Win2008Server R2"
+                    _isNotLoadSavePtr = new DeepPointer("dinput8.dll", 0x2C1D4);
+                    _isActiveWindowPtr = new DeepPointer(0x428518);
+                    _isMoviePlayingPtr = new DeepPointer(0x428798);
+                    break;
+            }
+
+            // _isNotLoadSavePtr = new DeepPointer("dinput8.dll", 0x2C1D4);
+            // _isActiveWindowPtr = new DeepPointer(0x428518);
+            // _isMoviePlayingPtr = new DeepPointer(0x428798);
 
             _ignorePIDs = new List<int>();
         }
@@ -141,6 +164,8 @@ namespace LiveSplit.Kotor2
                         }
                         else
                         {
+                            loadSaveStarted = false;
+
                             // unpause game timer
                             _uiThread.Post(d =>
                             {
@@ -160,6 +185,21 @@ namespace LiveSplit.Kotor2
                         {
                             return;
                         }
+                    }
+
+                    // Once the game has exited, unpause the game timer if necessary
+                    if (loadSaveStarted)
+                    {
+                        loadSaveStarted = false;
+
+                        // unpause game timer
+                        _uiThread.Post(d =>
+                        {
+                            if (this.OnLoadFinished != null)
+                            {
+                                this.OnLoadFinished(this, EventArgs.Empty);
+                            }
+                        }, null);
                     }
                 }
                 catch (Exception ex)
