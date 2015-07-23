@@ -34,21 +34,21 @@ namespace LiveSplit.Kotor2
                 case 0: // "Vista/Win2008Server"
                 case 1: // "Win7/Win2008Server R2"
                     _isNotLoadSavePtr = new DeepPointer("dinput8.dll", 0x2C1D4);
-                    _isActiveWindowPtr = new DeepPointer(0x428518);
-                    _isMoviePlayingPtr = new DeepPointer(0x428798);
+                    _isActiveWindowPtr = new DeepPointer(0x6194D8);
+                    _isMoviePlayingPtr = new DeepPointer(0x61975C);
                     break;
 
                 case 2: // "Win8/Win2012Server"
                 case 3: // "Win8.1/Win2012Server R2"
                     _isNotLoadSavePtr = new DeepPointer("dinput8.dll", 0x2C1D4);
-                    _isActiveWindowPtr = new DeepPointer(0x428518);
-                    _isMoviePlayingPtr = new DeepPointer(0x428798);
+                    _isActiveWindowPtr = new DeepPointer(0x6194D8);
+                    _isMoviePlayingPtr = new DeepPointer(0x61975C);
                     break;
 
                 default: // assume the same as "Vista/Win2008Server" and "Win7/Win2008Server R2"
                     _isNotLoadSavePtr = new DeepPointer("dinput8.dll", 0x2C1D4);
-                    _isActiveWindowPtr = new DeepPointer(0x428518);
-                    _isMoviePlayingPtr = new DeepPointer(0x428798);
+                    _isActiveWindowPtr = new DeepPointer(0x6194D8);
+                    _isMoviePlayingPtr = new DeepPointer(0x61975C);
                     break;
             }
 

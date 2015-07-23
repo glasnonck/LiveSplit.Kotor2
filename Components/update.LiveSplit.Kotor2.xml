@@ -1,22 +1,32 @@
 <updates>
-    <update version="1.0.1">
-        <files>
-            <file path="Components/LiveSplit.Kotor2.dll" status="changed"/>
-        </files>
-        <changelog>
-            <change>
-                Forced unpause while game closed
-            </change>
-        </changelog>
-    </update>
-    <update version="1.0.0">
-        <files>
-            <file path="Components/LiveSplit.Kotor2.dll" status="changed"/>
-        </files>
-        <changelog>
-            <change>
-                Initial release
-            </change>
-        </changelog>
-    </update>
+  <update version="1.0.2">
+    <files>
+      <file path="Components/LiveSplit.Kotor2.dll" status="changed"/>
+    </files>
+    <changelog>
+      <change>
+        Fix for the recent steam update
+      </change>
+    </changelog>
+  </update>
+  <update version="1.0.1">
+    <files>
+      <file path="Components/LiveSplit.Kotor2.dll" status="changed"/>
+    </files>
+    <changelog>
+      <change>
+        Forced unpause while game closed
+      </change>
+    </changelog>
+  </update>
+  <update version="1.0.0">
+    <files>
+      <file path="Components/LiveSplit.Kotor2.dll" status="changed"/>
+    </files>
+    <changelog>
+      <change>
+        Initial release
+      </change>
+    </changelog>
+  </update>
 </updates>
